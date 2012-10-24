@@ -12,7 +12,7 @@ public class jTracTest {
 		String PROJECT = "someproject";
 		String USERNAME = "username";
 		String PASSWORD = "password";
-		String TRAC_URL = "tracurl";
+		String TRAC_URL = "http://tracurl";
 
 		TracProxy trac = new TracProxy(TRAC_URL, PROJECT);
 		try {
