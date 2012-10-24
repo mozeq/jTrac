@@ -13,8 +13,8 @@ public class Ticket {
 	Date time_changed = null;
 	HashMap<String, String> attributes = null;
 
-@SuppressWarnings("unchecked")
-Ticket(Object[] o){
+	@SuppressWarnings("unchecked")
+	public Ticket(Object[] o){
 	   //[id, time_created, time_changed, attributes].
 	   int i;
 	   for(i=0; i < o.length; i++) {
@@ -35,5 +35,9 @@ Ticket(Object[] o){
 
    public String getComponent() {
 	   return attributes.get(COMPONENT);
+   }
+
+   public int getID() {
+	   return id;
    }
 }

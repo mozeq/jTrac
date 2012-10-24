@@ -12,13 +12,11 @@ public class TracProxy {
 	XmlRpcClient client = null;
 	String projectURL = null;
 
-	TracProxy(String serverURL, String project) {
-		this.projectURL = serverURL + (serverURL.endsWith("/") ? "" : "/") + (project != null ? project: "");
+	public TracProxy(String serverURL, String project) {
+		this.projectURL = serverURL + ((serverURL.endsWith("/") || project == null) ? "" : "/") + (project != null ? project: "");
 	}
 
 	public void connect(String name, String pass) throws MalformedURLException, XmlRpcException {
-		System.out.println("Connect");
-
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
     	String loginURL = projectURL+"/login/xmlrpc";
     	System.out.println(loginURL);
@@ -27,10 +25,13 @@ public class TracProxy {
 		config.setBasicPassword(pass);
 	    client = new XmlRpcClient();
 	    client.setConfig(config);
-
 	}
 
-	String[] getApiVersion() throws XmlRpcException {
+	public String getProjectURL() {
+		return projectURL;
+	}
+
+	public String[] getApiVersion() throws XmlRpcException {
 	    Object[] params = new Object[]{};
 		Object[] result = (Object[])client.execute("system.getAPIVersion", params);
 
@@ -43,12 +44,12 @@ public class TracProxy {
 
 	}
 
-	ArrayList<Ticket> getTickets(String query) {
+	public ArrayList<Ticket> getTickets(String query) {
     	System.out.println("getTickets");
 		return null;
     }
 
-	Ticket getTicket(int ticketID) throws XmlRpcException {
+	public Ticket getTicket(int ticketID) throws XmlRpcException {
 		Object[] params = { ticketID };
 		//Returns [id, time_created, time_changed, attributes].
 		Object[] result = (Object[])client.execute("ticket.get", params);
