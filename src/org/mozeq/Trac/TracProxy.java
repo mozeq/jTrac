@@ -19,7 +19,6 @@ public class TracProxy {
 	public void connect(String name, String pass) throws MalformedURLException, XmlRpcException {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
     	String loginURL = projectURL+"/login/xmlrpc";
-    	System.out.println(loginURL);
 		config.setServerURL(new URL(loginURL));
 		config.setBasicUserName(name);
 		config.setBasicPassword(pass);
